@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Homepage</title>
+    <style>
+      /* Add CSS for image dimensions */
+      .card-img {
+        width: 100%; /* Set the width to 100% to make all images the same width */
+        height: 200px; /* Set a fixed height for all images */
+        object-fit: cover; /* Maintain aspect ratio and cover the container */
+      }
+
+      .card {
+        margin-right: 10px; /* Adjust the value to control the spacing */
+      }
+
+      .row.row-cols-4 > .col:last-child .card {
+        margin-right: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <div class="container-fluid mt-3">
+      <div class="row row-cols-sm-2 row-cols-md-4">
+        <% blogs.forEach(blog => { %>
+        <div class="col mb-3">
+          <div class="card col" style="width: 18rem">
+            <img src="<%= blog.coverImg %>" class="card-img" />
+            <div class="card-body">
+              <h5 class="card-title"><%= blog.title %></h5>
+              <p class="text-muted"><%= (blog.body).slice(0,50)+"..." %></p>
+              <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <%- include('./partials/footer') %>
+  </body>
+</html>
